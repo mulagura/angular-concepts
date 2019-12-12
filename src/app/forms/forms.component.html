@@ -2,31 +2,75 @@
   <b>TDF forms works!</b>
 </p>
 
-<div class="container-fluid">
-  <form action="">
-    
-    <h2> Angular TDF Forms sample </h2>
+<form action="">
 
-    <label> 1. Your name : </label> <input type="text"> <br>
+  <h2> Angular TDF Forms sample </h2>
 
-    <label> 2. select gender : </label> <input type="radio" name="gender" value="male"> Male <br>
-    <input type="radio" name="gender" value="female"> Female <br>
+  <label> 1. Your name : </label> <input type="text"> <br>
 
-    <label> 3. Select your eating prefernce : </label>
-    <input type="checkbox" name="eat"> I am a vegeterian
-    <input type="checkbox" name="eat"> I am a eggeterian 
-    <input type="checkbox" name="eat"> I am a non-vegeterian <br>
+  <label> 2. select gender : </label> <input type="radio" name="gender" value="male"> Male <br>
+  <input type="radio" name="gender" value="female"> Female <br>
 
-    <label> 4. select your highest education : </label>
-    <select name="education">
-      <option value="Tenth"> Tenth X </option>
-      <option value="Inter"> Inter XII </option>
-      <option value="Degree"> Degree </option>
-      <option value="Matsers"> Master's </option>
-    </select> <br>
+  <label> 3. Select your eating prefernce : </label>
+  <input type="checkbox" name="eat"> I am a vegeterian
+  <input type="checkbox" name="eat"> I am a eggeterian
+  <input type="checkbox" name="eat"> I am a non-vegeterian <br>
+
+  <label> 4. select your highest education : </label>
+  <select name="education">
+    <option value="Tenth"> Tenth X </option>
+    <option value="Inter"> Inter XII </option>
+    <option value="Degree"> Degree </option>
+    <option value="Matsers"> Master's </option>
+  </select> <br>
+
+
+  <button type="submit" value="submit" class="btn btn-success"> Submit </button>
+
+</form>
+
+<h1> Class Registaration </h1>
+
+<form #formTemplateReferenceVariable="ngForm"> 
+  Name: <input type="text" name="username" [(ngModel)]="userdata.name"><br>
+  Email: <input type="email" name="email" required ngModel><br>
+  Conatct: <input type="number" name="contact" required ngModel><br>
+
+  <div ngModelGroup>
+    <div>
+      street : <input type="text" name="street" ngModel>
+    </div>
+    <div>
+      city : <input type="text" name="city" ngModel>
+    </div>
+    <div>
+      pincode : <input type="number" name="pincode" ngModel>
+    </div>
+  </div>
+
+  Select course:
+  <select name="course" ngModel>
+    <option value="default" disabled> Select one course: </option>
+    <option *ngFor="let course of courses">{{course}}</option>
+  </select> <br>
+
+  choose slot avialable:
+  <div *ngFor="let slot of slots">
+    <input type="radio" name="time" value="{{slot}}" name="slot" ngModel> {{slot}}
+  </div>
+
+  P.S. : <br>
+  <input type="checkbox" name="terms" [(ngModel)]="userdata.terms"> Agree to the terms abd conditions. <br>
+  <input type="checkbox" name="promo" ngModel> Receive promitional offfers. <br>
+
+  <button type="button" (click)="submitRegForm(formTemplateReferenceVariable)"> Join </button>
+
+  {{ userdata | json }}
  
+  <hr/>
 
-    <button type="submit" value="submit" class="btn btn-success"> Submit </button>
+  {{ formTemplateReferenceVariable.value  | json }}
 
-  </form>
-</div>
+
+
+</form>

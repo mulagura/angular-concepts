@@ -7,6 +7,12 @@ import { FormsComponent } from './forms/forms.component';
 import { ReactiveFormsComponent } from './forms/reactive-forms/reactive-forms.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// http
+import { HttpClientModule } from '@angular/common/http';
+
+// tdf
+import { FormsModule } from '@angular/forms';
+
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
@@ -40,17 +46,21 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { MatNativeDateModule } from '@angular/material';
+import { HttpComponent } from './http/http.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormsComponent,
-    ReactiveFormsComponent
+    ReactiveFormsComponent,
+    HttpComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
