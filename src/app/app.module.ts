@@ -45,15 +45,19 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
+
 import { MatNativeDateModule } from '@angular/material';
 import { HttpComponent } from './http/http.component';
+import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormsComponent,
     ReactiveFormsComponent,
-    HttpComponent
+    HttpComponent,
+    SnackbarComponent
   ],
   imports: [
     FormsModule,
@@ -92,9 +96,10 @@ import { HttpComponent } from './http/http.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatNativeDateModule 
+    MatNativeDateModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [SnackbarComponent],
+  bootstrap: [AppComponent],
+  exports: [SnackbarComponent]
 })
 export class AppModule { }

@@ -22,3 +22,10 @@ export interface UserDetails {
     }
 
 }
+
+export interface Posts{
+    userId:number;
+    id:number;
+    title:string;
+    body:string
+}

@@ -12,14 +12,14 @@ export class HttpComponent implements OnInit {
 
   ngOnInit() {
 
-    this.appService.getUsers()
-      .subscribe(
-        (data) => {
-          console.log('data --->', data);
-          (error) => {
-            console.log('error is--->', error);
-          }
-        });
+  //   this.appService.getUsers()
+  //     .subscribe(
+  //       (data) => {
+  //         console.log('data --->', data);
+  //         (error) => {
+  //           console.log('error is--->', error);
+  //         }
+  //       });
 
   }
 
