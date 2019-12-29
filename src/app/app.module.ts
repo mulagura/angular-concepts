@@ -50,6 +50,7 @@ import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material';
 import { HttpComponent } from './http/http.component';
 import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
+import { MaterialComponent } from './material/material.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service
     FormsComponent,
     ReactiveFormsComponent,
     HttpComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    MaterialComponent
   ],
   imports: [
     FormsModule,
