@@ -11,6 +11,8 @@ export class AppComponent {
   public minDate = new Date(); // update later
   public maxDate = new Date(); // empty -> take present
 
+
+
   constructor(private appService: AppService) { }
 
 
@@ -19,6 +21,14 @@ export class AppComponent {
     var toSet = this.minDate.setFullYear(this.minDate.getFullYear() - 18, this.minDate.getMonth(), this.minDate.getDate());
     var toSetDate = new Date(toSet);
     this.minDate = toSetDate;
+    let data = [{cid:'s123',infy:'infosys',is:'wipro'},{cid:'s124',infy:'infosys2',is:'wipro2'}];
+    let toxl:string;
+
+    for(let i=0;i<data.length;i++){
+      
+    }
+
+
 
 
 
@@ -31,5 +41,7 @@ export class AppComponent {
     this.appService.openSnackBar('Data Posted Successfully !!! ', 'success-snack');
 
   }
+
+
 
 }

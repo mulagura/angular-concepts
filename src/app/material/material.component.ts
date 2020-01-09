@@ -35,6 +35,12 @@ export class MaterialComponent implements OnInit {
   fitIndex:number;
   fitName:string;
 
+  // overlay
+  overlay:boolean = false;
+  x:any = null;;
+  y:any = null;
+
+
   constructor() { }
 
   ngOnInit() {
@@ -61,6 +67,42 @@ export class MaterialComponent implements OnInit {
       this.enableChip = false;
 
     }
+  }
+
+  // on mouse on leave
+  onHover(el){
+    console.log('clinet x',el.clientX, 'clinet y',el.clientY);
+    console.log('page x',el.pageX, 'page y',el.pageY);
+
+    this.x = el.clientX;
+    this.y = el.clientY;
+    
+    this.overlay = !this.overlay;
+    
+
+  }
+
+  onLeave(el){
+    // console.log(el.);
+    this.overlay = !this.overlay;
+
+    this.x = null;
+    this.y = null;
+
+  }
+
+  styleObj(){
+
+    if(this.x && this.y){
+      return{
+        position:'fixed',
+        left:this.x+'px',
+        top:this.y+'px'
+      }
+
+    }
+
+    return{}
   }
 
 
