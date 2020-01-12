@@ -12,14 +12,35 @@ export class HttpComponent implements OnInit {
 
   ngOnInit() {
 
-  //   this.appService.getUsers()
-  //     .subscribe(
-  //       (data) => {
-  //         console.log('data --->', data);
-  //         (error) => {
-  //           console.log('error is--->', error);
-  //         }
-  //       });
+    // get
+    this.appService.getPosts()
+      .subscribe(
+
+        (data) => {
+          console.log('comp data', data);
+        },
+
+        (err) => {
+          console.log(err.error);
+          console.log(err.name);
+          console.log(err.message);
+          console.log(err.status);
+        }
+
+      );
+// get 1
+
+    this.appService.getPosts1()
+    //     .subscribe(
+    //       (data) => {
+    //         console.log('data --->', data);
+    //         (error) => {
+    //           console.log('error is--->', error);
+    //         }
+    //       });
+
+    //post 1
+    this.appService.postPosts()
 
   }
 
