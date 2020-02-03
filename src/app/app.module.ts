@@ -51,6 +51,8 @@ import { MatNativeDateModule } from '@angular/material';
 import { HttpComponent } from './http/http.component';
 import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
 import { MaterialComponent } from './material/material.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { RoutesComponent } from './routes/routes.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { MaterialComponent } from './material/material.component';
     ReactiveFormsComponent,
     HttpComponent,
     SnackbarComponent,
-    MaterialComponent
+    MaterialComponent,
+    RoutesComponent
   ],
   imports: [
     FormsModule,
@@ -96,6 +99,7 @@ import { MaterialComponent } from './material/material.component';
     MatTooltipModule,
     MatSnackBarModule,
     MatTableModule,
+    CdkTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatNativeDateModule

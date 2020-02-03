@@ -109,6 +109,11 @@ export class AppService {
 
   }
 
+  //get table data from json
+  getTableData(){
+    return this.http.get(`http://localhost:4200/assets/tableData.json`);
+  }
+
 
   //snack bar method; duration in milliseconds,data is message to display, panelClass is css class from ts
   openSnackBar(message: string, panelClass: string) {

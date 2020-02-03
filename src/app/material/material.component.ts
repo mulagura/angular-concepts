@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 export interface PeriodicElement {
   name: string;
@@ -7,19 +8,6 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
 @Component({
   selector: 'app-material',
   templateUrl: './material.component.html',
@@ -27,62 +15,181 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class MaterialComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
 
-
-  enableChip:boolean = false;
-  fitIndex:number;
-  fitName:string;
 
   // overlay
-  overlay:boolean = false;
-  x:any = null;;
-  y:any = null;
+  overlay: boolean = false;
+  x: any = null;;
+  y: any = null;
+
+  tableData: Object = {};
+
+  table_JSON_data;
+  table_data: Array<any> = [];
+  table_data_without_UNIT: Array<any> = [];
+  table_data_with_UNIT: Array<any> = [];
+  table_header: Array<string> = [];
+
+  candidateIdList:Array<string> = [];
+
+  dataSource;
+  displayedColumns;
+
+  selectedIndex: number;
+  selectedColumn: string;
+  enableChip: boolean = false;
 
 
-  constructor() { }
+  constructor(private appService: AppService) { }
+
 
   ngOnInit() {
+
+
+    //tabledata transform
+    this.appService.getTableData()
+      .subscribe(
+        (data) => {
+          if (data) {
+
+            this.table_JSON_data = data;
+            console.log(this.table_JSON_data);
+
+            let table_JSON_dataLength = this.table_JSON_data.length;
+            let keys = Object.keys(this.table_JSON_data[0]);
+            this.table_header = keys;
+            let each_row_obj_without_UNIT = {};
+            let each_row_obj_with_UNIT = {};
+
+            for (let i = 0; i < table_JSON_dataLength; i++) {
+
+              each_row_obj_without_UNIT[i] = {};
+              each_row_obj_with_UNIT[i] = {};
+
+              for (let j = 0; j < keys.length; j++) {
+
+                if (keys[j] !== 'unit') {
+                  each_row_obj_without_UNIT[i][keys[j]] = this.table_JSON_data[i][keys[j]].count;
+                }
+
+                if (keys[j] === 'unit') {
+                  each_row_obj_with_UNIT[i][keys[j]] = this.table_JSON_data[i][keys[j]];
+                }
+
+              }
+
+              let toPush = Object.assign(each_row_obj_with_UNIT[i], each_row_obj_without_UNIT[i]);
+              this.table_data.push(toPush)
+
+            }
+
+
+            this.tableData = { 'ELEMENT_DATA': this.table_data, 'headers': this.table_header };
+
+            this.dataSource = this.table_data;
+            this.displayedColumns = this.table_header;
+
+
+          }
+        }
+      )
+
   }
 
-  getIndex(i,name){
-    event.stopPropagation();
-    console.log('index->',i,name);
-    this.fitIndex = i;
-    this.fitName = name;
-    if(name === this.fitName && i === this.fitIndex){
-      console.log('true');
-      // return true;
+  // click method to show candidates
+  showCandidates(index: number, columnName: string, unit: object) {
+    let unitName;
+    if (event) {
+      event.stopPropagation();
+    }
+    this.selectedIndex = index;
+    this.selectedColumn = columnName;
+
+    if (columnName === this.selectedColumn && index === this.selectedIndex) {
       this.enableChip = true;
+      if (this.enableChip) {
+
+        for (let unitKey in unit) {
+          if (unitKey === 'unit') {
+            unitName = unit[unitKey];
+          }
+        }
+      }
     }
+
+    let table_JSON_dataLength = this.table_JSON_data.length;
+
+    for (let i = 0; i < table_JSON_dataLength; i++) {
+
+      for(let eachObjRow in this.table_JSON_data[i]){
+ 
+        if( this.table_JSON_data[i][eachObjRow] === unitName ){
+
+          let thatObj = this.table_JSON_data[i];
+
+          for(let unitRow in thatObj){
+
+            if(unitRow === columnName){
+
+              let candidateList = []; 
+
+              candidateList.push(
+                thatObj[unitRow].id
+              )
+
+              this.candidateIdList = candidateList;
+              
+            }
+            
+          }
+          
+        }
+        
+      }
+
+
+
+
+
+    }
+
+    console.log(index, columnName, unitName);
+    console.log(this.candidateIdList);
     
-    
+
+    // event emitter to pass data; passing index and respective column 
+
+    // this.valueToParent.emit({ index: index, column: columnName });
+
+
   }
 
-  remove(i,name,el){
-    event.stopPropagation();
-    if(i === this.fitIndex && name === this.fitName){
-      console.log('if');
+  // show value and chip methods
+  removeChip(index: number, columnName: string, el) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (index === this.selectedIndex && columnName === this.selectedColumn) {
       this.enableChip = false;
-
     }
   }
+
 
   // on mouse on leave
-  onHover(el){
-    console.log('clinet x',el.clientX, 'clinet y',el.clientY);
-    console.log('page x',el.pageX, 'page y',el.pageY);
+  onHover(el) {
+    console.log('clinet x', el.clientX, 'clinet y', el.clientY);
+    console.log('page x', el.pageX, 'page y', el.pageY);
 
     this.x = el.clientX;
     this.y = el.clientY;
-    
+
     this.overlay = !this.overlay;
-    
+
 
   }
 
-  onLeave(el){
+  onLeave(el) {
     // console.log(el.);
     this.overlay = !this.overlay;
 
@@ -91,19 +198,21 @@ export class MaterialComponent implements OnInit {
 
   }
 
-  styleObj(){
+  styleObj() {
 
-    if(this.x && this.y){
-      return{
-        position:'fixed',
-        left:this.x+'px',
-        top:this.y+'px'
+    if (this.x && this.y) {
+      return {
+        position: 'fixed',
+        left: this.x + 'px',
+        top: this.y + 'px'
       }
 
     }
 
-    return{}
+    return {}
   }
+
+
 
 
 }
