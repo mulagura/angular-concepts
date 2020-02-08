@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "angular-concepts"
+  "defaultProject": "angular-concepts",
+  "cli": {
+    "analytics": "de288617-68ac-49e0-8d4a-91021c549cfb"
+  }
 }
