@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 // snackbar
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
 
 // interface
@@ -32,6 +32,9 @@ export class AppService {
 
   // get by one post
   readonly GET_USER_URL_1: string = "https://jsonplaceholder.typicode.com/posts/1";
+
+  //get photos/thumbnails
+  readonly GET_USER_THUMBNAILS : string = `https://jsonplaceholder.typicode.com/photos`;
 
 
   // get posts data
@@ -112,6 +115,12 @@ export class AppService {
   //get table data from json
   getTableData(){
     return this.http.get(`http://localhost:4200/assets/tableData.json`);
+  }
+
+  // get pics 
+
+  getThumbnails(): Observable<any>{
+    return this.http.get(`${this.GET_USER_THUMBNAILS}`);
   }
 
 

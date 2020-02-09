@@ -1,0 +1,37 @@
+<h3> Angular Virtual scroll comes down here </h3>
+<p> pagination -> loads when clicked particular page, gives chunks ;
+  inifnte scroll -> loads upto certain scroll if scroll again appends data to previously loaded, if keep on scroll DOM
+  will have more
+  virtual scroll -> displays only accroding to that viepwort and changes when scrolls, DOM will have only that vieport
+  data</p>
+
+<p> itemSize is height of each height in px </p>
+<p> cdk-virtual-scroll-viewport -> height 400px is viewing in px </p>  
+
+<div [ngStyle]="{'padding':'30px'}">
+
+  <cdk-virtual-scroll-viewport itemSize="100">
+
+    <table [ngStyle]="{'height':'100px'}">
+      <thead>
+        <tr>
+          <th> ID </th>
+          <th> Name </th>
+          <th> PIC </th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <tr *cdkVirtualFor="let pic of thumbnails; templateCacheSize:0">
+          <td> {{ pic.id }} </td>
+          <td> {{pic.title | slice:0:5 }} </td>
+          <td>  <img src=" {{pic.thumbnailUrl}}" width="100" height="100"> </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </cdk-virtual-scroll-viewport>
+
+
+
+</div>

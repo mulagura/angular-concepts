@@ -14,8 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 //Angular Material Components
-import {MatCheckboxModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -44,15 +44,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material/core';
 import { HttpComponent } from './http/http.component';
 import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
 import { MaterialComponent } from './material/material.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { RoutesComponent } from './routes/routes.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { RoutesComponent } from './routes/routes.component';
     HttpComponent,
     SnackbarComponent,
     MaterialComponent,
-    RoutesComponent
+    RoutesComponent,
+    VirtualScrollComponent
   ],
   imports: [
     FormsModule,
@@ -102,7 +105,8 @@ import { RoutesComponent } from './routes/routes.component';
     CdkTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ScrollingModule
   ],
   entryComponents: [SnackbarComponent],
   bootstrap: [AppComponent],
