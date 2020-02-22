@@ -61,7 +61,8 @@ export class ViewSpeechComponent implements OnInit {
   deleteSpeech() {
     console.log(this.selectedSpeech);
     if (this.selectedSpeech) {
-      alert(`deleting by id : ${this.selectedSpeech.speech_id}`)
+      
+      this._appService.openSnackBar(`deleteing by id ${this.selectedSpeech.speech_id}`, 'success-snack');
       this._appService.deleteSpeechByID(this.selectedSpeech.speech_id)
         .subscribe(
           (res) => {

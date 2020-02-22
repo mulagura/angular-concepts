@@ -159,7 +159,7 @@ export class AppService {
     this.snackBar.openFromComponent(SnackbarComponent, {
       data: message,
       panelClass: panelClass,
-      duration: 2000
+      duration: 3000
     });
   }
 

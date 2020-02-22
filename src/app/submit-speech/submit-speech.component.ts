@@ -39,22 +39,17 @@ export class SubmitSpeechComponent implements OnInit {
       date:speech.value.date
     }
     if(speech.valid){
-      alert(
-        `saving ${speechObj.content}`
-      )
 
       this._appService.saveSpeechData(speechObj)
         .subscribe(
           (res)=>{
             // console.log(res);
-            // alert('speech saved successfully')
-
             // speech.reset();
             
           },
           (err)=>{
             console.log(err);
-            alert('speech saved successfully')
+            this._appService.openSnackBar(`saving ${speechObj.keyword}`, 'success-snack');
             speech.reset();
             
           }
