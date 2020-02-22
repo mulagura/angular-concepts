@@ -48,6 +48,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 
+import {MatRippleModule} from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpComponent } from './http/http.component';
 import { SnackbarComponent } from './snackbar-as-a-service/snackbar-as-a-service.component';
@@ -55,6 +58,8 @@ import { MaterialComponent } from './material/material.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { RoutesComponent } from './routes/routes.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { ViewSpeechComponent } from './view-speech/view-speech.component';
+import { SubmitSpeechComponent } from './submit-speech/submit-speech.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,9 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     SnackbarComponent,
     MaterialComponent,
     RoutesComponent,
-    VirtualScrollComponent
+    VirtualScrollComponent,
+    ViewSpeechComponent,
+    SubmitSpeechComponent
   ],
   imports: [
     FormsModule,
@@ -106,7 +113,9 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     MatSortModule,
     MatPaginatorModule,
     MatNativeDateModule,
-    ScrollingModule
+    ScrollingModule,
+    MatRippleModule,
+    ReactiveFormsModule
   ],
   entryComponents: [SnackbarComponent],
   bootstrap: [AppComponent],

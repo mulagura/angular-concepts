@@ -1,0 +1,28 @@
+<div [ngStyle]="{'padding':'30px'}" class="list_div">
+
+  <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+
+    <div *cdkVirtualFor="let speech of speech_repo; let i = index" class="example-item" (click)="showSpeech(speech)"
+      [ngStyle]="{'cursor':'pointer'}" matRipple>{{speech.speech_id}}</div>
+
+  </cdk-virtual-scroll-viewport>
+
+  <div *ngIf="enableCard" class="card_div">
+
+    <mat-card [ngStyle]="{'width':'400px'}">
+      <mat-card-content>
+        <p> <b> Speech Content: </b> {{speechCard.speech_content}} </p>
+        <p> <b> Speech Author: </b>{{speechCard.speech_author}} </p>
+        <p> <b> Speech Keyword: </b>{{speechCard.speech_keyword}} </p>
+        <p> <b> Speech Date: </b>{{speechCard.speech_date| date:'dd LLL yy'}}</p>
+
+      </mat-card-content>
+    </mat-card>
+
+    <button mat-raised-button color="warn" (click)="deleteSpeech()" [ngStyle]="{'margin':'10px'}"> Delete {{speech}}</button>
+
+  </div>
+
+
+
+</div>

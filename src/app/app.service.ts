@@ -4,6 +4,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/internal/operators';
 
 // snackbar
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,6 +37,34 @@ export class AppService {
 
   //get photos/thumbnails
   readonly GET_USER_THUMBNAILS : string = `https://jsonplaceholder.typicode.com/photos`;
+
+  //get speeches
+  readonly GET_SPEECH:string = 'assets/speech_data.json';
+
+
+  // get speeches
+  getSpeechData(){
+    return this.http.get(this.GET_SPEECH);
+  }
+
+  // save speeches
+
+  saveSpeechData(speech){
+    return this.http.put(this.GET_SPEECH,speech);
+  }
+
+  //delete speeches
+  deleteSpeechByID(id){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    console.log(id);
+    return this.http.delete(this.GET_SPEECH+id,httpOptions);
+    
+  }
 
 
   // get posts data

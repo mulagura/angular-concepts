@@ -1,0 +1,34 @@
+.example-viewport {
+    height: 500px;
+    width: 200px;
+    border: 1px solid black;
+  }
+  
+  .example-item {
+    height: 50px;
+  }
+
+  .list_div{
+    float: left;
+  }
+
+  .card_div{
+    float: right;
+    display: inline-block;
+    position: relative;
+    /* top: -41px; */
+    bottom: 500px;
+    left: 300px;
+  }
+
+  #parent_div_1, #parent_div_2, #parent_div_3 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    margin-right: 10px;
+    float: left;
+  }
+  .child_div_1 {
+    float: left;
+    margin-right: 5px;
+  }
